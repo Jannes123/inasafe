@@ -52,6 +52,13 @@ if __name__ == '__main__':
     # setup functions
     register_impact_functions()
     # globals
+    output_file = None
+    hazard = None
+    exposure = None
+    version = None
+    show_list = None
+    extent = None
+
     try:
         # Parse arguments, use file docstring as a parameter definition
         arguments = docopt.docopt(usage)
@@ -61,6 +68,7 @@ if __name__ == '__main__':
         exposure = arguments['--exposure']
         version = arguments['--version']
         show_list = arguments['--list']
+        extent = arguments['--extent']
         LOGGER.debug(arguments)
     # Handle invalid options
     except docopt.DocoptExit as e:
@@ -68,4 +76,9 @@ if __name__ == '__main__':
 
     if show_list:
         show_names(get_ifunction_list())
+
+    elif (extent is not None) and\
+            (hazard is not None) and\
+            (exposure is not None):
+        print "do an IF dude!"
 
